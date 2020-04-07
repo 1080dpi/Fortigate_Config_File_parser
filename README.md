@@ -1,4 +1,4 @@
-# Fortigate_Config_File_parser
+# Fortigate Config File Powershell parser
 
 Workin in progress... 
 
