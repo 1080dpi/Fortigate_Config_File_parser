@@ -29,7 +29,7 @@ $conf_policy = Get-Content $temp_file
 
 foreach ($line in $conf_policy) {
 
-        IF($line -match '^ edit (?<ID>[\d]*)( set name "(?<NAME>.*)")? set uuid (?<UUID>.*) set srcintf "(?<SRCINTF>.*)" set dstintf "(?<DSTINTF>.*)" set srcaddr (?<SRCADDR>"(.*?)") set dstaddr (?<DSTADDR>"(.*?)")( set action (?<ACTION>accept))? set schedule "(?<SCHEDULE>.*)" set service (?<SERVICE>"(.*?)")( set logtraffic (?<LOG>all|disable))?(( set ippool (?<IPPOOL>enable)) set poolname "(?<POOLNAME>.*)")?( set fsso (?<FSSO>disable))?( set nat (?<NAT>enable))?( set comments "(?<COMMENTS>.*)")?')
+        IF($line -match '^ edit (?<ID>[\d]*)( set name "(?<NAME>.*)")? set uuid (?<UUID>.*) set srcintf "(?<SRCINTF>.*)" set dstintf "(?<DSTINTF>.*)" set srcaddr (?<SRCADDR>"(.*?)") set dstaddr (?<DSTADDR>"(.*?)")( set action (?<ACTION>accept))? set schedule "(?<SCHEDULE>.*)" set service (?<SERVICE>"(.*)")?( set logtraffic (?<LOG>all|disable))?(( set ippool (?<IPPOOL>enable)) set poolname "(?<POOLNAME>.*)")?( set fsso (?<FSSO>disable))?( set nat (?<NAT>enable))?( set comments "(?<COMMENTS>.*)")?')
         {
   
             $array += [PSCustomObject] @{ID = $Matches.ID
