@@ -1,4 +1,5 @@
-﻿Param(
+#PART 0 - INITIATING
+Param(
 [parameter(Mandatory=$true)]$in,
 [string]$out
 )
@@ -14,9 +15,8 @@ $array = @()
 [int]$rule = 0
 
 
-#PART 1 - CREATION DU FICHIER DE TRAVAIL TEMP.
+#PART 1 - CREATING A TEMPORARLY WORK FILE 
     $conf_file = Get-Content $in_file
-
 
     [string]$conf_file = $conf_file -replace "\s{2,}"
     [string]$conf_file = $conf_file -replace "next","`r`n"
@@ -54,9 +54,9 @@ foreach ($line in $conf_policy) {
 }
 
 write-host "--- DEBUG INFORMATION ---"
-write-host "Fichier source : $in"              #Debug
-write-host "Chemin : $in_file"                 #Debug
-write-host "Fichier destination : $out"        #Debug
+write-host "File source : $in"              #Debug
+write-host "Path : $in_file"                 #Debug
+write-host "File output : $out"        #Debug
 write-host "Parsing rules : $rule"             #Debug
 Write-host "---------- END ----------"
 
