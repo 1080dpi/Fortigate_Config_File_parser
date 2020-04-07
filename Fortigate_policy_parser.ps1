@@ -15,7 +15,7 @@ $array = @()
 [int]$rule = 0
 
 
-#PART 1 - CREATING A TEMPORARLY WORK FILE 
+#PART 1 - CREATING A TEMPORARY WORK FILE 
     $conf_file = Get-Content $in_file
 
     [string]$conf_file = $conf_file -replace "\s{2,}"
@@ -54,11 +54,11 @@ foreach ($line in $conf_policy) {
 }
 
 write-host "--- DEBUG INFORMATION ---"
-write-host "File source : $in"              #Debug
+write-host "File source : $in"               #Debug
 write-host "Path : $in_file"                 #Debug
-write-host "File output : $out"        #Debug
-write-host "Parsing rules : $rule"             #Debug
+write-host "File output : $out"              #Debug
+write-host "Parsing rules : $rule"           #Debug
 Write-host "---------- END ----------"
 
-Remove-Item $temp_file                          #Suppression du fichier temp
-$array | export-csv $out_file                   #Export du tableau en CSV
+Remove-Item $temp_file                          #Deleting temporary file
+$array | export-csv $out_file                   #Array to CSV export 
