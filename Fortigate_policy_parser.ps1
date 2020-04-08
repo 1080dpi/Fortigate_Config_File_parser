@@ -19,7 +19,7 @@ $array = @()
     $conf_file = Get-Content $in_file
 
     [string]$conf_file = $conf_file -replace "\s{2,}"
-    [string]$conf_file = $conf_file -replace "next","`r`n"
+    [string]$conf_file = $conf_file -replace " next",";`r`n"
     [string]$conf_file = $conf_file -replace "config firewall policy","config firewall policy `r`n"
 
     add-content $temp_file $conf_file
@@ -29,7 +29,7 @@ $conf_policy = Get-Content $temp_file
 
 foreach ($line in $conf_policy) {
 
-        IF($line -match '^ edit (?<ID>[\d]*)( set name "(?<NAME>.*)")? set uuid (?<UUID>.*) set srcintf "(?<SRCINTF>.*)" set dstintf "(?<DSTINTF>.*)" set srcaddr (?<SRCADDR>"(.*?)") set dstaddr (?<DSTADDR>"(.*?)")( set action (?<ACTION>accept))? set schedule "(?<SCHEDULE>.*)" set service (?<SERVICE>"(.*)")?( set logtraffic (?<LOG>all|disable))?(( set ippool (?<IPPOOL>enable)) set poolname "(?<POOLNAME>.*)")?( set fsso (?<FSSO>disable))?( set nat (?<NAT>enable))?( set comments "(?<COMMENTS>.*)")?')
+        IF($line -match '^ edit (?<ID>[\d]*)( set name "(?<NAME>.*)")? set uuid (?<UUID>.*) set srcintf "(?<SRCINTF>.*)" set dstintf "(?<DSTINTF>.*)" set srcaddr (?<SRCADDR>"(.*?)") set dstaddr (?<DSTADDR>"(.*?)")( set action (?<ACTION>accept))? set schedule "(?<SCHEDULE>.*)" set service (?<SERVICE>"(.*?)")( set logtraffic (?<LOG>all|disable))?(( set ippool (?<IPPOOL>enable)) set poolname "(?<POOLNAME>.*)")?( set fsso (?<FSSO>disable))?( set nat (?<NAT>enable))?( set comments "(?<COMMENTS>.*)")?;')
         {
   
             $array += [PSCustomObject] @{ID = $Matches.ID
@@ -53,12 +53,12 @@ foreach ($line in $conf_policy) {
         }
 }
 
-write-host "--- DEBUG INFORMATION ---"
+write-host "--- DATA INFORMATIONS ---"
 write-host "File source : $in"               #Debug
 write-host "Path : $in_file"                 #Debug
 write-host "File output : $out"              #Debug
 write-host "Parsing rules : $rule"           #Debug
 Write-host "---------- END ----------"
 
-Remove-Item $temp_file                          #Deleting temporary file
-$array | export-csv $out_file                   #Array to CSV export 
+Remove-Item $temp_file                                             #Deleting temporary file
+$array | export-csv -NoTypeInformation $out_file                   #Array to CSV export 
